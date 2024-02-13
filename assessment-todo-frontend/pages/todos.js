@@ -6,8 +6,6 @@ import Task from '../components/Task';
 import apiFetch from '../functions/apiFetch';
 
 const ToDos = () => {
-    const [asdf, setAsdf] = useState([]);
-    
     // Load ToDos on page loading.
     useEffect(() => {
         getToDos();
@@ -16,26 +14,23 @@ const ToDos = () => {
     const [data, setData] = useState();
 
     const getToDos = async (event) => {
-        const all = [];
-        const todos = [];
+        const allToDos = [];
         let response = await apiFetch("/todo/asdf", {
             method: "GET"
         });
 
         const result = response.body.map(function(obj) {
-            return all.push([obj.name, obj.created, obj.todoID, obj.status]);
+            return allToDos.push([obj.name, obj.created, obj.todoID, obj.status]);
         });
 
-        // Sort by creation date
-        all.sort(function (a, b){
+        // Sort by todos by creation date
+        allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
 
-        const populate = all.map(function(obj) {
-            return todos.push(obj[0]);
-        })
+
         
-        setData(all);
+        setData(allToDos);
     }
 
     const toggleDisplay = (e) => {

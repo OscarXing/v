@@ -17,7 +17,6 @@ const Task = ({id, text, status, type="button", isFullWidth=false, size="large",
             body: uniqueID,
             method: "PATCH"
         });
-
     }
     return (
         <ButtonElement id={id} type={type} isFullWidth={isFullWidth} size={size} variant={variant} disabledVariant={disabledVariant} disabled={disabled} {...otherProps}>
