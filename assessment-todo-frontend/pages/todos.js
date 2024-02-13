@@ -16,26 +16,23 @@ const ToDos = () => {
     const [data, setData] = useState();
 
     const getToDos = async (event) => {
-        const all = [];
-        const todos = [];
+        const allToDos = [];
+        
         let response = await apiFetch("/todo/asdf", {
             method: "GET"
         });
 
         const result = response.body.map(function(obj) {
-            return all.push([obj.name, obj.created, obj.todoID, obj.status]);
+            return allToDos.push([obj.name, obj.created, obj.todoID, obj.status]);
         });
 
         // Sort by creation date
-        all.sort(function (a, b){
+        allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
 
-        const populate = all.map(function(obj) {
-            return todos.push(obj[0]);
-        })
         
-        setData(all);
+        setData(allToDos);
     }
 
     const toggleDisplay = (e) => {
