@@ -15,6 +15,7 @@ const ToDos = () => {
 
     const getToDos = async (event) => {
         const allToDos = [];
+        
         let response = await apiFetch("/todo/asdf", {
             method: "GET"
         });
@@ -27,7 +28,6 @@ const ToDos = () => {
         allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
-
 
         
         setData(allToDos);
