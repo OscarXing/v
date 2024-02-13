@@ -11,19 +11,35 @@ import { useDispatch, useSelector } from 'react-redux';
           
 const Task = ({id, text, status, type="button", isFullWidth=false, size="large", variant="primary", disabledVariant="neutral", disabled=false, ...otherProps}) => {
     const todoState = useSelector((state) => state.todo);
-    const updateStatus = async (event) => {
-        const uniqueID = {"userID":event.target.id};
+    const updateStatus = async (e) => {
+        if (e.target.style.backgroundColor === "yellow" & e.target.style.backgroundColor !== "inherit") {
+            e.target.style.backgroundColor = "lightgreen"
+        }
+        else if (e.target.style.backgroundColor === "lightgreen" & e.target.style.backgroundColor !== "inherit") {
+            e.target.style.backgroundColor = "yellow"
+        }
+        const uniqueID = {"userID":e.target.id};
         let response = await apiFetch("/todo/id", {
             body: uniqueID,
             method: "PATCH"
         });
     }
+
+    const toggleDisplay = (e) => {
+        if (e.target.style.backgroundColor === "yellow" & e.target.style.backgroundColor !== "inherit") {
+            e.target.style.backgroundColor = "lightgreen"
+        }
+        else if (e.target.style.backgroundColor === "lightgreen" & e.target.style.backgroundColor !== "inherit") {
+            e.target.style.backgroundColor = "yellow"
+        }
+    }
+
     return (
         <ButtonElement id={id} type={type} isFullWidth={isFullWidth} size={size} variant={variant} disabledVariant={disabledVariant} disabled={disabled} {...otherProps}>
             <span className="centerContent" style={{border: 'dotted', justifyContent: 'left'}} id={id}>
                 {text}
             </span>
-            <span id={id} status={status} style={{border: 'dotted', backgroundColor: 'blue'}} onClick={updateStatus}>
+            <span id={id} status={status} style={{border: 'dotted', backgroundColor: status === 'In Progress' ? "yellow": "lightgreen"}} onClick={updateStatus}>
                 Status: {status}
             </span>
         </ButtonElement>

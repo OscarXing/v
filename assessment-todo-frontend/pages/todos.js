@@ -5,6 +5,7 @@ import PageLayout from '../components/PageLayout';
 import Task from '../components/Task';
 import apiFetch from '../functions/apiFetch';
 
+
 const ToDos = () => {
     // Get ToDos on page loading.
     useEffect(() => {
@@ -12,6 +13,13 @@ const ToDos = () => {
         }, []);
 
     const [data, setData] = useState();
+    const [filter, setFilter] = useState("All");
+    
+    const changeFunc = () => {
+        const selectBox = document.getElementById("Options");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        setFilter(selectedValue);
+    };
 
     const getToDos = async (event) => {
         const allToDos = [];
@@ -44,12 +52,15 @@ const ToDos = () => {
     
     function RenderData() {
         const stuff = data?.map((data) => {
+            // Conditionally render based on filter selection
             return (
                 <li key={data[2]}>
+                    {(data[3] == filter || filter == "All") &&
                     <Task style={{borderStyle: 'dotted', height: '100px', width: '100%', 
                                     flexdirection: 'column', backgroundColor: 'lightgreen', 
                                     justifyContent: 'center', padding: '0px'}} id={data[2]} text={data[0]} status={data[3]}>
                     </Task>
+                    } 
                 </li>
             )
         });
@@ -61,6 +72,11 @@ const ToDos = () => {
             <Container>
                 <div className="content">
                     <h1>Your To Dos:</h1>
+                    <select name="Options" id="Options" onChange={changeFunc}>
+                        <option value="All">All</option>
+                        <option value="Complete">Complete</option>
+                        <option value="In Progress">In Progress</option>
+                    </select>
                     <RenderData/>
                 </div>
             </Container>
