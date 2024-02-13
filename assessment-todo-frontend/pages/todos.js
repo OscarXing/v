@@ -24,7 +24,7 @@ const ToDos = () => {
             return allToDos.push([obj.name, obj.created, obj.todoID, obj.status]);
         });
 
-        // Sort by todos by creation date
+        // Sort todos by creation date
         allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
