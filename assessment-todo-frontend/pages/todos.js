@@ -6,8 +6,6 @@ import Task from '../components/Task';
 import apiFetch from '../functions/apiFetch';
 
 const ToDos = () => {
-    const [asdf, setAsdf] = useState([]);
-    
     // Load ToDos on page loading.
     useEffect(() => {
         getToDos();
@@ -26,7 +24,7 @@ const ToDos = () => {
             return allToDos.push([obj.name, obj.created, obj.todoID, obj.status]);
         });
 
-        // Sort by creation date
+        // Sort todos by creation date
         allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
