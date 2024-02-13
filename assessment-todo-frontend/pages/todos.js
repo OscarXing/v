@@ -6,7 +6,7 @@ import Task from '../components/Task';
 import apiFetch from '../functions/apiFetch';
 
 const ToDos = () => {
-    // Load ToDos on page loading.
+    // Get ToDos on page loading.
     useEffect(() => {
         getToDos();
         }, []);
@@ -16,7 +16,7 @@ const ToDos = () => {
     const getToDos = async (event) => {
         const allToDos = [];
         
-        let response = await apiFetch("/todo/asdf", {
+        let response = await apiFetch("/todo/all", {
             method: "GET"
         });
 
@@ -28,11 +28,10 @@ const ToDos = () => {
         allToDos.sort(function (a, b){
             return a[1].localeCompare(b[1]);
         })
-
-        
         setData(allToDos);
     }
 
+    // Toggle the display so that it reflects the status
     const toggleDisplay = (e) => {
         if (e.target.style.backgroundColor === "yellow" & e.target.style.backgroundColor !== "inherit") {
             e.target.style.backgroundColor = "lightgreen"
@@ -42,7 +41,7 @@ const ToDos = () => {
         }
     }
     
-    // Clicking in the button on the text doesn't do what we want???
+    
     function RenderData() {
         const stuff = data?.map((data) => {
             return (

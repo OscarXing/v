@@ -40,8 +40,8 @@ export default ({todoRepository}) => {
         }
     });
     
-    // New Stuff From Here Currently not using same url for post and get, should be kept this way or not?
-    router.get('/asdf', auth, async (req, res) => {
+    // Get a users todos
+    router.get('/all', auth, async (req, res) => {
         try {
             let session = verifyToken(req.cookies['todox-session']);
             const todos = await todoRepository.getToDoByUser(session.userID);
