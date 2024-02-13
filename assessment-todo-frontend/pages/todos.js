@@ -8,19 +8,14 @@ import apiFetch from '../functions/apiFetch';
 
 const ToDos = () => {
     // Get ToDos on page loading.
-    useEffect(() => {
-        getToDos();
-        }, []);
-
     const [data, setData] = useState();
     const [filter, setFilter] = useState("All");
-    
-    const changeFunc = () => {
-        const selectBox = document.getElementById("Options");
-        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-        setFilter(selectedValue);
-    };
+    const [updater, setUpdater] = useState(false);
 
+    useEffect(() => {
+        getToDos();
+        }, [updater]);
+    
     const getToDos = async (event) => {
         const allToDos = [];
         
@@ -39,16 +34,40 @@ const ToDos = () => {
         setData(allToDos);
     }
 
-    // Toggle the display so that it reflects the status
-    const toggleDisplay = (e) => {
-        if (e.target.style.backgroundColor === "yellow" & e.target.style.backgroundColor !== "inherit") {
-            e.target.style.backgroundColor = "lightgreen"
+
+    const updateStatus = async (e) => {
+        
+        if (e.target.style.backgroundColor === "yellow"){
+            e.target.style.backgroundColor = "lightgreen";
         }
-        else if (e.target.style.backgroundColor === "lightgreen" & e.target.style.backgroundColor !== "inherit") {
-            e.target.style.backgroundColor = "yellow"
+        else {
+            e.target.style.backgroundColor = "yellow";
         }
+
+        if (updater == false) {
+            setUpdater(true);
+        }
+
+        if (updater == true) {
+            setUpdater(false);
+        }
+        
+        
+        const uniqueID = {"userID":e.target.id};
+
+        let response = await apiFetch("/todo/id", {
+            body: uniqueID,
+            method: "PATCH"
+        });
+
+        console.log(response);
     }
-    
+
+    const changeFunc = () => {
+        const selectBox = document.getElementById("Options");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        setFilter(selectedValue);
+    };
     
     function RenderData() {
         const stuff = data?.map((data) => {
@@ -56,9 +75,8 @@ const ToDos = () => {
             return (
                 <li key={data[2]}>
                     {(data[3] == filter || filter == "All") &&
-                    <Task style={{borderStyle: 'dotted', height: '100px', width: '100%', 
-                                    flexdirection: 'column', backgroundColor: 'lightgreen', 
-                                    justifyContent: 'center', padding: '0px'}} id={data[2]} text={data[0]} status={data[3]}>
+                    <Task style={{ height: '100px', width: '100%', 
+                                    flexdirection: 'column', justifyContent: 'center', padding: '0px'}} functionPassed={updateStatus} id={data[2]} text={data[0]} status={data[3]}>
                     </Task>
                     } 
                 </li>
@@ -120,7 +138,6 @@ const Container = styled.div`
         justify-content: center;
         text-align: left;
         transition: color 0ms;
-        background-color: blue;
         width: 175px;
         height: 50px;
     }

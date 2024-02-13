@@ -15,7 +15,7 @@ export default async (path, {body={}, headers={}, method="GET"}={}) => {
         options = {
             ...options,
             headers: {
-                'Content-Type': 'application/json', //Seems to not work when running PATCH as not json type?
+                'Content-Type': 'application/json',
                 ...options.headers
             },
             body: JSON.stringify(body)

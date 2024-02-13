@@ -59,39 +59,20 @@ export default ({todoRepository}) => {
         }
     });
 
-    // Update status
-    router.get('/id', auth, async (req, res) => {
-        try {
-            let session = verifyToken(req.cookies['todox-session']);
-            console.log("Verified User");
-
-            let testVar = {
-                ...req
-            };
-
-            console.log(testVar);
-        }
-        catch (err) {
-            console.error(err);
-            res.status(500).send({error: "Failed to fetch user."});
-        }
-    });
-
     // Update status of todo related to uniqueID
     router.patch('/id', auth, async (req, res) => {
         try {
             let session = verifyToken(req.cookies['todox-session']);
-            console.log("Verified User");
             
             let testVar = {
                 ...req.body
             }
-
-            console.log(testVar.userID);
             
+            if (testVar) {
+                console.log("asdf");
+            }
             const todos = await todoRepository.getToDoByID(testVar.userID);
-            console.log(todos);
-            
+            return res.status(200).send({success: "updated successfully"})
         }
         catch (err) {
             console.error(err);
