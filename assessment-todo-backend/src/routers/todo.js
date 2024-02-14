@@ -45,7 +45,7 @@ export default ({todoRepository}) => {
         try {
             let session = verifyToken(req.cookies['todox-session']);
             const todos = await todoRepository.getToDoByUser(session.userID);
-            // Sends back all the posts
+            // Sends back all the posts from the current user
             if (todos) {
                 return res.status(200).send(todos);
             }
@@ -64,19 +64,18 @@ export default ({todoRepository}) => {
         try {
             let session = verifyToken(req.cookies['todox-session']);
             
-            let testVar = {
+            let todoID = {
                 ...req.body
             }
             
-            if (testVar) {
-                console.log("asdf");
+            if (todoID) {
+                const todos = await todoRepository.getToDoByID(todoID.todoID);
+                return res.status(200).send({success: "updated successfully"});
             }
-            const todos = await todoRepository.getToDoByID(testVar.userID);
-            return res.status(200).send({success: "updated successfully"})
         }
         catch (err) {
             console.error(err);
-            res.status(500).send({error: "Failed to fetch user."});
+            res.status(500).send({error: "Failed to fetch user from todoID."});
         }
     });
 

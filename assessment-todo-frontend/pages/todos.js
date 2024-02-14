@@ -53,10 +53,10 @@ const ToDos = () => {
         }
         
         
-        const uniqueID = {"userID":e.target.id};
+        const todoID = {"todoID":e.target.id};
 
         let response = await apiFetch("/todo/id", {
-            body: uniqueID,
+            body: todoID,
             method: "PATCH"
         });
 
