@@ -9,7 +9,7 @@ export default {
         },
         "name": {
             "type": "string"
-        },
+        }, // Added status parameter
         "status": {
             "type": "string"
         },

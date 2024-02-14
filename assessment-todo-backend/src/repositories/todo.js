@@ -6,14 +6,14 @@ export default (db) => {
         return await collection.insertOne(todo);
     }
 
-    // New function for getting singular toDo
+    // function for getting all toDos from a userID
     async function getToDoByUser(userID) {
         return await collection.find({
             userID
         }).toArray();
     }
 
-    // New function for getting unique toDo by id
+    // function for getting unique toDo by todoID
     async function getToDoByID(todoID) {
         return await collection.updateOne(
             {todoID: todoID},
