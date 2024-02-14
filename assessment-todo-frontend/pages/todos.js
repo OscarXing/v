@@ -47,8 +47,7 @@ const ToDos = () => {
         if (updater == false) {
             setUpdater(true);
         }
-
-        if (updater == true) {
+        else {
             setUpdater(false);
         }
         
@@ -60,7 +59,6 @@ const ToDos = () => {
             method: "PATCH"
         });
 
-        console.log(response);
     }
 
     const changeFunc = () => {

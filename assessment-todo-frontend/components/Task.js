@@ -10,8 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // a string for what text should be rendered and set a variant to control the colour scheme
           
 const Task = ({id, text, status, functionPassed, type="button", isFullWidth=false, size="large", variant="primary", disabledVariant="neutral", disabled=false, ...otherProps}) => {
-    const [isChanging, setIsChanging] = useState(false);
-
     return (
         <ButtonElement id={id} type={type} isFullWidth={isFullWidth} size={size} variant={variant} disabledVariant={disabledVariant} disabled={disabled} {...otherProps}>
             <span className="centerContent" style={{border: 'dotted', justifyContent: 'left'}} id={id}>
