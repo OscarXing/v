@@ -12,10 +12,10 @@ import { useDispatch, useSelector } from 'react-redux';
 const Task = ({id, text, status, functionPassed, type="button", isFullWidth=false, size="large", variant="primary", disabledVariant="neutral", disabled=false, ...otherProps}) => {
     return (
         <ButtonElement id={id} type={type} isFullWidth={isFullWidth} size={size} variant={variant} disabledVariant={disabledVariant} disabled={disabled} {...otherProps}>
-            <span className="centerContent" style={{border: 'dotted', justifyContent: 'left'}} id={id}>
+            <span className="centerContent" style={{justifyContent: 'left'}} id={id}>
                 {text}
             </span>
-            <span id={id} status={status} style={{border: 'dotted', backgroundColor: status === 'In Progress' ? "yellow": "lightgreen"}} onClick={functionPassed}>
+            <span id={id} status={status} style={{borderRadius: '2.75rem', backgroundColor: status === 'In Progress' ? "yellow": "lightgreen"}} onClick={functionPassed}>
                 Status: {status}
             </span>
         </ButtonElement>
@@ -26,7 +26,6 @@ export default Task;
 
 const ButtonElement = styled.button`
     align-items: center;
-    border: dotted;
     border-radius: 2.75rem;
     display: flex;
     font-family: ${Typography.FONTS.BODY};
@@ -70,7 +69,7 @@ const ButtonElement = styled.button`
             }
             else if (props.variant === "primary") {
                 return `
-                    background-color: ${Colours.PRIMARY};
+                    background-color: #c9ecf2;
                     color: ${Colours.BLACK};
                 `;
             }
