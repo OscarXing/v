@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 // Custom button component for Task, pass in:
-// an id to identify the task
-// a string for what text should be rendered and set a variant to control the colour scheme
+//  an id to identify the task
+//  a string for what text should be rendered and set a variant to control the colour scheme
+//  a string for what status should be displayed
+//  a function to be called onClick
           
 const Task = ({id, text, status, functionPassed, type="button", isFullWidth=false, size="large", variant="primary", disabledVariant="neutral", disabled=false, ...otherProps}) => {
     return (
@@ -15,7 +17,7 @@ const Task = ({id, text, status, functionPassed, type="button", isFullWidth=fals
             <span className="centerContent" style={{justifyContent: 'left'}} id={id}>
                 {text}
             </span>
-            <span id={id} status={status} style={{borderRadius: '2.75rem', backgroundColor: status === 'In Progress' ? "yellow": "lightgreen"}} onClick={functionPassed}>
+            <span className="statusContent" id={id} status={status} style={{backgroundColor: status === 'In Progress' ? "yellow": "lightgreen"}} onClick={functionPassed}>
                 Status: {status}
             </span>
         </ButtonElement>
@@ -151,5 +153,9 @@ const ButtonElement = styled.button`
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
+
+    span.statusContent {
+        border-radius: 2.75rem;
     }
 `;

@@ -36,7 +36,6 @@ const ToDos = () => {
 
 
     const updateStatus = async (e) => {
-        
         if (e.target.style.backgroundColor === "yellow"){
             e.target.style.backgroundColor = "lightgreen";
         }
@@ -51,9 +50,7 @@ const ToDos = () => {
             setUpdater(false);
         }
         
-        
         const todoID = {"todoID":e.target.id};
-
         let response = await apiFetch("/todo/id", {
             body: todoID,
             method: "PATCH"
@@ -73,7 +70,7 @@ const ToDos = () => {
             return (
                 <li key={data[2]}>
                     {(data[3] == filter || filter == "All") &&
-                    <Task style={{ height: '100px', width: '100%', 
+                    <Task className="taskButton" style={{ width: '100%', 
                                     flexdirection: 'column', justifyContent: 'center', padding: '0px'}} functionPassed={updateStatus} id={data[2]} text={data[0]} status={data[3]}>
                     </Task>
                     } 
@@ -132,11 +129,10 @@ const Container = styled.div`
     }
 
     .taskButton {
-        border: dotted;
+        height: 80px;
         justify-content: center;
         text-align: left;
         transition: color 0ms;
         width: 175px;
-        height: 50px;
     }
 `;
