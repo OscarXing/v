@@ -70,8 +70,7 @@ const ToDos = () => {
             return (
                 <li key={data[2]}>
                     {(data[3] == filter || filter == "All") &&
-                    <Task className="taskButton" style={{ width: '100%', 
-                                    flexdirection: 'column', justifyContent: 'center', padding: '0px'}} functionPassed={updateStatus} id={data[2]} text={data[0]} status={data[3]}>
+                    <Task className="taskButton" functionPassed={updateStatus} id={data[2]} text={data[0]} status={data[3]}>
                     </Task>
                     } 
                 </li>
@@ -130,9 +129,9 @@ const Container = styled.div`
 
     .taskButton {
         height: 80px;
+        width: 75%;
         justify-content: center;
         text-align: left;
         transition: color 0ms;
-        width: 175px;
     }
 `;
